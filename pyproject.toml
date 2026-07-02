@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "camber-convert"
+version = "0.1.0"
+description = "Read structural-monitoring (bridge sensor) data from any format and write it to one small open format: JSON metadata + Parquet measurements."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Vladimir" }]
+keywords = [
+    "structural-health-monitoring",
+    "shm",
+    "bridges",
+    "sensors",
+    "vibration",
+    "parquet",
+    "interoperability",
+    "open-format",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "pyarrow>=14",
+]
+
+[project.optional-dependencies]
+# Native National Instruments TDMS support (see readers/tdms_reader.py)
+tdms = ["npTDMS>=1.9"]
+# Development / testing
+dev = ["pytest>=7"]
+
+[project.scripts]
+camber-convert = "camber_convert.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/vukovicvl/camber-convert"
+Issues = "https://github.com/vukovicvl/camber-convert/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
