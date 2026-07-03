@@ -28,6 +28,19 @@ from .model import (
     Sensor,
 )
 from .readers.base import UnsupportedFormatError, read, supported_extensions
+from .readers.csv_reader import (
+    CsvInspection,
+    inspect_csv,
+    read_csv,
+    stream_measurements,
+)
+from .readers._csvutil import CsvFormatError, Dialect
+from .readers.wide_csv_reader import (
+    ChannelSpec,
+    ImportProfile,
+    find_profile,
+    load_profiles,
+)
 from .writers.json_writer import build_metadata, write_json
 from .writers.parquet_writer import write_parquet
 
@@ -40,15 +53,26 @@ __version__ = FORMAT_VERSION
 
 __all__ = [
     "read",
+    "read_csv",
     "convert",
     "write_dataset",
     "supported_extensions",
     "UnsupportedFormatError",
+    "CsvFormatError",
     "Dataset",
     "Asset",
     "Sensor",
     "Measurement",
     "Location",
+    # Wide / multi-channel CSV import
+    "inspect_csv",
+    "stream_measurements",
+    "CsvInspection",
+    "Dialect",
+    "ImportProfile",
+    "ChannelSpec",
+    "load_profiles",
+    "find_profile",
     "build_metadata",
     "write_json",
     "write_parquet",

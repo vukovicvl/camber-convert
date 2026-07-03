@@ -27,15 +27,19 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Scientific/Engineering",
 ]
-dependencies = [
-    "pyarrow>=14",
-]
+# Core is dependency-free: the readers and JSON metadata writer need only the
+# standard library, so the package installs anywhere (incl. Python builds with
+# no pyarrow wheel yet). Writing the open-format Parquet file needs pyarrow,
+# which is the optional [parquet] extra below.
+dependencies = []
 
 [project.optional-dependencies]
+# Writing the open-format .parquet measurements file (see writers/parquet_writer.py)
+parquet = ["pyarrow>=14"]
 # Native National Instruments TDMS support (see readers/tdms_reader.py)
 tdms = ["npTDMS>=1.9"]
-# Development / testing
-dev = ["pytest>=7"]
+# Development / testing (includes parquet so the round-trip test can run)
+dev = ["pytest>=7", "pyarrow>=14"]
 
 [project.scripts]
 camber-convert = "camber_convert.cli:main"
